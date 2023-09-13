@@ -24,15 +24,14 @@ jobs:
         env: 
           path_vkpr: "`pwd`/vkpr.yaml"
         run: |
+            curl -fsSL https://get.vkpr.net/ | bash
+            rit update repo --name="vkpr-cli" --version=1.3.5
             shopt -s expand_aliases
             alias vkpr="rit vkpr"
             rit set credential --provider="aws" \
                 --fields="accesskeyid,region,secretaccesskey" \
                 --values="${{ secrets.AWS_ACCESS_KEY }},${{ secrets.AWS_REGION }},${{ secrets.AWS_SECRET_KEY }}" 
             aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME}} --region ${{ secrets.AWS_REGION}}
-            ls -ltrh ${{env.path_vkpr}}
-            ls -la
-            rit update repo --name="vkpr-cli" --version=1.3.5
             rit vkpr apply --path_to_file="${{env.path_vkpr}}"
 
       - name: Upload kubeconfig file as artefact
