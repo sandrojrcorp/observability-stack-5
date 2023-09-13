@@ -29,6 +29,7 @@ jobs:
                 --values="${{ secrets.AWS_ACCESS_KEY }},${{ secrets.AWS_REGION }},${{ secrets.AWS_SECRET_KEY }}" 
 
       - name: Vkpr apply
+        shell: bash
         env: 
           path_vkpr: "`pwd`/vkpr.yaml"
         run: |
