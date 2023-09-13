@@ -7,7 +7,7 @@ jobs:
   observability_stack:
     runs-on: ubuntu-latest
     container:
-      image: docker://veecode/vkpr-runner:github_1.3.5
+      image: docker://veecode/vkpr-runner:1.3.5
     steps:
       - uses: actions/checkout@v3
 
