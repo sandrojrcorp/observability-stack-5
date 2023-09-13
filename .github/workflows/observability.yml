@@ -29,10 +29,13 @@ jobs:
                 --values="${{ secrets.AWS_ACCESS_KEY }},${{ secrets.AWS_REGION }},${{ secrets.AWS_SECRET_KEY }}" 
 
       - name: Vkpr apply
+        env: 
+          path_vkpr: "`pwd`/vkpr.yaml"
         run: |
+          echo ${{env.path_vkpr}}
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME}} --region ${{ secrets.AWS_REGION}}
           ls -ltrh
-          rit vkpr apply --path_to_file="`pwd`/vkpr.yaml"
+          rit vkpr apply --path_to_file=${{env.path_vkpr}}
 
       - name: Upload kubeconfig file as artefact
         uses: actions/upload-artifact@v2
