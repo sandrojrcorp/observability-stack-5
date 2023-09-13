@@ -30,8 +30,6 @@ jobs:
 
       - name: Vkpr apply
         run: |
-          shopt -s expand_aliases
-          alias vkpr="rit vkpr"
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME}} --region ${{ secrets.AWS_REGION}}
           ls -ltrh
           vkpr apply --path_to_file="~/vkpr.yaml"
